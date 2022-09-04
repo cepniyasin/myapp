@@ -9,9 +9,8 @@ export class BoardComponent implements OnInit {
   squares: any[];
   xIsNext: boolean;
   winner: string;
-
-  constructor() {}
-
+  wait: boolean;
+  
   ngOnInit() {
     this.newGame();
   }
@@ -20,6 +19,7 @@ export class BoardComponent implements OnInit {
     this.squares = Array(9).fill(null);
     this.winner = null;
     this.xIsNext = true;
+    this.wait = false
   }
 
   get player() {
@@ -27,15 +27,18 @@ export class BoardComponent implements OnInit {
   }
 
   makeMove(idx: number) {
-    if (!this.winner){
+    if (!this.winner && !this.wait){
     if (!this.squares[idx]) {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
-
     }
     this.winner = this.calculateWinner(this.squares);
 
-    if (!this.winner && !this.xIsNext){this.opponentMove()}
+    if (!this.winner && !this.xIsNext){
+      this.wait = true
+      setTimeout(()=> this.opponentMove(), 400)
+      
+    }
     }
     
   }
@@ -43,53 +46,54 @@ export class BoardComponent implements OnInit {
 ////// My main additions start. /////
 
   opponentMove(){
+    this.wait = false
     let possibleMoves = this.findPossibleMoves(this.squares)
     let winningMove = this.checkWinningMove(possibleMoves, "O");
-    if(winningMove){
-      this.squares.splice(winningMove, 1, 'O');
-      this.winner = this.calculateWinner(this.squares)
-      this.xIsNext = !this.xIsNext;
-      return
-    }
-
     let blockingMove = this.checkWinningMove(possibleMoves, "X");
-    if (blockingMove){
+    if(winningMove !== null){
+      this.squares.splice(winningMove, 1, 'O');
+      this.winner = this.calculateWinner(this.squares);
+      this.xIsNext = !this.xIsNext;
+      this.findPossibleMoves(this.squares)
+    } else if (blockingMove !== null){
       this.squares.splice(blockingMove, 1, 'O');
       this.xIsNext = !this.xIsNext;
-      return
-    }
-
-    if (possibleMoves.length){
+      this.findPossibleMoves(this.squares)
+    } else if (possibleMoves.length){
     this.makeRandomMove(possibleMoves);
-    this.xIsNext = !this.xIsNext; }
+    this.xIsNext = !this.xIsNext; 
+    this.findPossibleMoves(this.squares)
+    }
   }
 
   findPossibleMoves(arr){
-    let possibleMoveIndices = []
+    let current_state = [];
+    let possibleMoveIndices = [];
     for (let i = 0; i < arr.length; i++) {
+      current_state.push(arr[i]);
       if (arr[i] == null){
-        possibleMoveIndices.push(i)
+        possibleMoveIndices.push(i);
       }
     }
-    return possibleMoveIndices
+    return possibleMoveIndices;
   }
 
   checkWinningMove(arr, player: String){
     for (let i = 0; i < arr.length; i++) {
-        let temp_arr = [...this.squares]
-        temp_arr[arr[i]] = player
+        let temp_arr = [...this.squares];
+        temp_arr[arr[i]] = player;
         if (this.calculateWinner(temp_arr)){
-          return arr[i]
+          return arr[i];
         }
     }
     return null
   }
 
+
   makeRandomMove(arr){
-    let numberOfPossibleMoves = arr.length
-    let randomIndex = this.getRandomInt(numberOfPossibleMoves)
-    this.squares.splice(randomIndex, 1, 'O');
-      return
+    let numberOfPossibleMoves = arr.length;
+    let randomIndex = this.getRandomInt(numberOfPossibleMoves);
+    this.squares.splice(arr[randomIndex], 1, 'O');
   }
   
   getRandomInt(max:number) {
