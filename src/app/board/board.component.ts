@@ -27,7 +27,7 @@ export class BoardComponent implements OnInit {
   }
 
   makeMove(idx: number) {
-        if (!this.winner){
+    if (!this.winner){
     if (!this.squares[idx]) {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
@@ -35,7 +35,7 @@ export class BoardComponent implements OnInit {
     }
     this.winner = this.calculateWinner(this.squares);
 
-    if (!this.winner){this.opponentMove()}
+    if (!this.winner && !this.xIsNext){this.opponentMove()}
     }
     
   }
@@ -44,7 +44,7 @@ export class BoardComponent implements OnInit {
 
   opponentMove(){
     let possibleMoves = this.findPossibleMoves(this.squares)
-    let winningMove = this.checkWinningMove(possibleMoves);
+    let winningMove = this.checkWinningMove(possibleMoves, "O");
     if(winningMove){
       this.squares.splice(winningMove, 1, 'O');
       this.winner = this.calculateWinner(this.squares)
@@ -52,16 +52,16 @@ export class BoardComponent implements OnInit {
       return
     }
 
-    let blockingMove = this.checkBlockingMove(possibleMoves);
+    let blockingMove = this.checkWinningMove(possibleMoves, "X");
     if (blockingMove){
       this.squares.splice(blockingMove, 1, 'O');
       this.xIsNext = !this.xIsNext;
       return
     }
 
+    if (possibleMoves.length){
     this.makeRandomMove(possibleMoves);
-    this.xIsNext = !this.xIsNext;
-    return 
+    this.xIsNext = !this.xIsNext; }
   }
 
   findPossibleMoves(arr){
@@ -71,32 +71,18 @@ export class BoardComponent implements OnInit {
         possibleMoveIndices.push(i)
       }
     }
-    console.log(possibleMoveIndices)
     return possibleMoveIndices
   }
 
-  checkWinningMove(arr){
+  checkWinningMove(arr, player: String){
     for (let i = 0; i < arr.length; i++) {
         let temp_arr = [...this.squares]
-        temp_arr[arr[i]] = "O"
+        temp_arr[arr[i]] = player
         if (this.calculateWinner(temp_arr)){
-          console.log(arr[i])
           return arr[i]
         }
     }
     return null
-  }
-  
-  checkBlockingMove(arr){
-    for (let i = 0; i < arr.length; i++) {
-      let temp_arr = [...this.squares]
-      temp_arr[arr[i]] = "X"
-      if (this.calculateWinner(temp_arr)){
-        console.log(arr[i])
-        return arr[i]
-      }
-  }
-  return null
   }
 
   makeRandomMove(arr){
@@ -111,7 +97,7 @@ export class BoardComponent implements OnInit {
   }
 
   
-////// My additions end. /////
+////// My main additions end. /////
 
 
   calculateWinner(arr) {
