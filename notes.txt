@@ -1,1 +1,1 @@
-ng add @angular/pwa --project myprojectname
+https://ticktt-d54ad.web.app/
