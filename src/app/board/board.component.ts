@@ -37,7 +37,6 @@ export class BoardComponent implements OnInit {
     if (!this.winner && !this.xIsNext){
       this.wait = true
       setTimeout(()=> this.opponentMove(), 400)
-      
     }
     }
     

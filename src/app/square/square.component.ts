@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
     <button nbButton *ngIf="value == 'X'">{{ value }}</button>
     <button nbButton *ngIf="value == 'O'">{{ value }}</button>
   `,
-  styles: ['button { width: 100%; height: 100%; font-size: 5em !important; }']
+  styles: ['button { width: 100%; height: 100%; font-size: 5em !important; } @media (max-width: 640px) {button { width: 100%; height: 100%; font-size: 2em !important; }}']
+  
 })
 export class SquareComponent  {
 

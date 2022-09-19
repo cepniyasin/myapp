@@ -1,13 +1,12 @@
+// .container_div{
+//     /* Center vertically and horizontally */
+//     position: absolute;
+//      top: 5%;
+//     left: 35%;
+//   //   transform: translate(-50%, -50%);
+//     transform: translate(-30%);
+//   }
 
-
-.container_div{
-  /* Center vertically and horizontally */
-  position: absolute;
-//   top: 50%;
-  left: 40%;
-//   transform: translate(-50%, -50%);
-  transform: translate(-50%);
-}
 
 main {
     display: grid;
@@ -17,26 +16,24 @@ main {
   
 app-square {
     border: 1px gray solid;
-    height: 10rem;
-        
+    height: 10rem;        
 }
 
-
-@media only screen and (max-width: 640px) {
+@media (max-width: 640px) {
     main {
         display: grid;
-        grid-template-columns: 5.5rem 5.5rem 5.5rem;
+        grid-template-columns: 6rem 6rem 6rem;
         grid-gap: 0px;
     }
       
     app-square {
         border: 1px gray solid;
-        height: 5.5rem;
-            
+        height: 6rem;
+        
     }
   }
 
-  @media only screen and (max-height: 740px) {
+  @media (max-height: 640px) {
     main {
         display: grid;
         grid-template-columns: 5.5rem 5.5rem 5.5rem;
