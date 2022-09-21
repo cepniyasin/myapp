@@ -1,13 +1,3 @@
-// .container_div{
-//     /* Center vertically and horizontally */
-//     position: absolute;
-//      top: 5%;
-//     left: 35%;
-//   //   transform: translate(-50%, -50%);
-//     transform: translate(-30%);
-//   }
-
-
 main {
     display: grid;
     grid-template-columns: 10rem 10rem 10rem;
@@ -15,7 +5,7 @@ main {
 }
   
 app-square {
-    border: 1px gray solid;
+    // border: 1px gray solid;
     height: 10rem;        
 }
 
@@ -27,7 +17,7 @@ app-square {
     }
       
     app-square {
-        border: 1px gray solid;
+        // border: 1px gray solid;
         height: 6rem;
         
     }
@@ -41,7 +31,7 @@ app-square {
     }
       
     app-square {
-        border: 1px gray solid;
+        // border: 1px gray solid;
         height: 5.5rem;
             
     }

@@ -10,6 +10,7 @@ export class BoardComponent implements OnInit {
   xIsNext: boolean;
   winner: string;
   wait: boolean;
+  draw: boolean;
   
   ngOnInit() {
     this.newGame();
@@ -19,7 +20,9 @@ export class BoardComponent implements OnInit {
     this.squares = Array(9).fill(null);
     this.winner = null;
     this.xIsNext = true;
-    this.wait = false
+    this.wait = false;
+    this.draw = false
+    
   }
 
   get player() {
@@ -59,10 +62,12 @@ export class BoardComponent implements OnInit {
       this.xIsNext = !this.xIsNext;
       this.findPossibleMoves(this.squares)
     } else if (possibleMoves.length){
-    this.makeRandomMove(possibleMoves);
-    this.xIsNext = !this.xIsNext; 
-    this.findPossibleMoves(this.squares)
-    }
+      this.makeRandomMove(possibleMoves);
+      this.xIsNext = !this.xIsNext; 
+      this.findPossibleMoves(this.squares)
+    } else {
+      this.draw = true; 
+      }
   }
 
   findPossibleMoves(arr){

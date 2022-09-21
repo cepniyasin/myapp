@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(161, 180, 219);
   }
+  
   
   .btn-wrapper {
     /* flexbox */
@@ -12,31 +13,27 @@ body {
   
   .btn {
     color: #000;
-    background-color: rgb(255, 255, 255);
+    // background-color:rgb(205, 169, 41);
     border: 2px solid #cecece;
     padding: .35rem 1rem .25rem 1rem;
-    font-size: 1rem;
+    // font-size: 1rem;
   }
   
-  // .btn:hover {
-  //   background-color: #ecf2fd;
-  // }
+  .btn:hover {
+    background-color: #ecf2fd;
+  }
 
   section  {
+    font-family: 'Baloo Tamma', sans-serif;
     /* Center vertically and horizontally */
     position: absolute;
-     top: 50%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);    
 }
   
-  .btn:active {
-    background-color: #d1e0fe;
-  }
-  
-  // .btn:focus {
-  //   outline: none;
-  //   border: black solid 2px;
+  // .btn:active {
+  //   background-color: #d1e0fe;
   // }
   
   .btn-primary {
@@ -44,9 +41,12 @@ body {
     background-color: #000;
     width: 100%;
     padding: .75rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     border: black solid 2px;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+    font-family: monospace, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    
   }
   
   .btn-primary:hover {
@@ -56,15 +56,54 @@ body {
   .btn-primary:focus {
     color: #000;
     outline: none;
-    border: #000 solid 2px;
-    background-color: #d7ecff;
+    border: #000 solid 0.1px;
+    background-color: rgb(161, 180, 219);
   }
   
   .btn-primary:active {
     background-color: #212020;
   }
   
-// div {
-//     float: left;
-    
-// }
+  /* NEW CSS */
+
+  .btn-three {
+    font-family: monospace;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+    border: #000 solid 0.1px;
+
+  }
+  .btn-three {
+    color: rgb(19, 19, 19);
+    transition: all 0.5s;
+    position: relative;
+    background-color: #c6c4c4;
+
+  }
+  .btn-three::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(233, 230, 230, 0.1);
+    transition: all 0.3s;
+  }
+  .btn-three:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+  }
+  .btn-pressed{
+    font-family: monospace, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #e8e6e6;
+    border: #000 solid 0.1px;
+  }
+
+.container_div{
+  text-align: center
+}
+  
